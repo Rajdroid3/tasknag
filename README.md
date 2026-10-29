@@ -1,19 +1,24 @@
 # TaskNag — Smart Task Reminder & Persistent Completion App
 
+[![Release](https://img.shields.io/github/v/release/Rajdroid3/tasknag?color=blue&label=Latest%20APK)](https://github.com/Rajdroid3/tasknag/releases/latest)
+[![Platform](https://img.shields.io/badge/Platform-Android%208.0%2B%20%28API%2026--34%29-green)](https://developer.android.com)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
+
 > **“Don't just remind me. Keep reminding me until I finish the task.”**
 
 TaskNag is a modern, reliable Android application engineered specifically around task execution and relentless follow-through. Unlike passive to-do apps or basic calendar alerts that fire once and disappear, TaskNag continuously nags and re-alerts the user at custom repeat intervals until the task occurrence is marked completed, snoozed, or explicitly skipped.
 
 ---
 
-## 📱 Pre-built APK Ready to Install
+## 📱 Download & Install
 
-- **Root APK**: `C:\Users\Kavinraj\.gemini\antigravity\scratch\TaskNag.apk`
-- **Build Output**: `C:\Users\Kavinraj\.gemini\antigravity\scratch\tasknag\app\build\outputs\apk\debug\app-debug.apk`
+Download the latest pre-compiled APK directly from GitHub Releases:
 
-To install directly to a connected Android phone via ADB:
+👉 **[Download TaskNag-v1.0.0.apk](https://github.com/Rajdroid3/tasknag/releases/latest/download/TaskNag-v1.0.0.apk)**
+
+Or install via ADB to a connected device:
 ```powershell
-adb install -r "C:\Users\Kavinraj\.gemini\antigravity\scratch\TaskNag.apk"
+adb install -r "TaskNag.apk"
 ```
 
 ---
