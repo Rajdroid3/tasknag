@@ -1,0 +1,737 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <!-- AppBar & Toolbar -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/primary"
+            app:title="TaskNag"
+            app:subtitle="Persistent Smart Reminders" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- Main Content Container with 4 Pages -->
+    <FrameLayout
+        android:id="@+id/contentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="56dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <!-- ================= PAGE 1: DASHBOARD ================= -->
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollDashboard"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="80dp">
+
+                    <!-- ACTIVE PERSISTENT ALERT BANNER (Shown when Due or Overdue tasks exist) -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardActiveNagBanner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:layout_marginTop="12dp"
+                        app:cardCornerRadius="14dp"
+                        app:cardElevation="3dp"
+                        app:cardBackgroundColor="@color/banner_bg"
+                        android:visibility="gone">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="14dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    android:id="@+id/tvNagBannerHeader"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="🚨 PERSISTENT REMINDER ACTIVE"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/banner_title"
+                                    android:letterSpacing="0.04" />
+
+                                <View
+                                    android:layout_width="0dp"
+                                    android:layout_height="1dp"
+                                    android:layout_weight="1" />
+
+                                <TextView
+                                    android:id="@+id/tvNagBannerCount"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Reminder #2"
+                                    android:textSize="11sp"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/status_overdue_text"
+                                    android:background="@color/status_overdue_bg"
+                                    android:paddingStart="6dp"
+                                    android:paddingEnd="6dp"
+                                    android:paddingTop="2dp"
+                                    android:paddingBottom="2dp" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/tvNagBannerTitle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Take Vitamin B12"
+                                android:textSize="17sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/text_primary"
+                                android:layout_marginTop="6dp" />
+
+                            <TextView
+                                android:id="@+id/tvNagBannerSubtitle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Overdue by 25m • Nagging every 15m until completed"
+                                android:textSize="12sp"
+                                android:textColor="@color/banner_subtitle"
+                                android:layout_marginTop="2dp" />
+
+                            <!-- 1-Tap Banner Actions -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical"
+                                android:layout_marginTop="10dp">
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btnBannerComplete"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="38dp"
+                                    android:text="✓ Complete Task"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold"
+                                    app:backgroundTint="#2E7D32"
+                                    app:cornerRadius="8dp"
+                                    android:insetTop="0dp"
+                                    android:insetBottom="0dp"
+                                    android:layout_marginEnd="6dp" />
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btnBannerSnooze"
+                                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="38dp"
+                                    android:text="⏰ Snooze 10m"
+                                    android:textSize="12sp"
+                                    android:textColor="@color/text_primary"
+                                    app:strokeColor="@color/divider"
+                                    app:cornerRadius="8dp"
+                                    android:insetTop="0dp"
+                                    android:insetBottom="0dp"
+                                    android:layout_marginEnd="6dp" />
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btnBannerSkip"
+                                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="38dp"
+                                    android:text="✕ Skip"
+                                    android:textSize="12sp"
+                                    android:textColor="@color/text_secondary"
+                                    android:insetTop="0dp"
+                                    android:insetBottom="0dp" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- TODAY'S PROGRESS CARD -->
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:layout_marginTop="12dp"
+                        app:cardCornerRadius="14dp"
+                        app:cardElevation="2dp"
+                        app:cardBackgroundColor="@color/surface">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Today's Progress"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/text_primary" />
+
+                                <TextView
+                                    android:id="@+id/tvProgressFraction"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="3 / 5 Done"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/primary" />
+                            </LinearLayout>
+
+                            <ProgressBar
+                                android:id="@+id/progressBarToday"
+                                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="8dp"
+                                android:progress="60"
+                                android:progressDrawable="@drawable/bg_pill"
+                                android:layout_marginTop="10dp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="10dp">
+
+                                <TextView
+                                    android:id="@+id/tvCompletedStat"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="✅ 3 Completed"
+                                    android:textSize="12sp"
+                                    android:textColor="@color/status_completed_text" />
+
+                                <TextView
+                                    android:id="@+id/tvOverdueStat"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="⚠️ 1 Overdue"
+                                    android:textSize="12sp"
+                                    android:textColor="@color/status_overdue_text"
+                                    android:gravity="center" />
+
+                                <TextView
+                                    android:id="@+id/tvRemainingStat"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="🕒 1 Upcoming"
+                                    android:textSize="12sp"
+                                    android:textColor="@color/status_upcoming_text"
+                                    android:gravity="end" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- QUICK ADD SHORTCUTS BAR -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginStart="14dp"
+                        android:layout_marginEnd="14dp"
+                        android:layout_marginTop="14dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Quick Add"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_secondary"
+                            android:textAllCaps="true" />
+
+                        <TextView
+                            android:id="@+id/btnOpenQuickAddModal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="⚡ Fast Presets"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/primary"
+                            android:padding="4dp" />
+                    </LinearLayout>
+
+                    <!-- Filter Chips (All, Today, Due/Overdue, Upcoming, Completed) -->
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="none"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:layout_marginTop="8dp">
+
+                        <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/chipGroupDashboardFilters"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:singleSelection="true">
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/chipFilterToday"
+                                style="@style/Widget.MaterialComponents.Chip.Choice"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Today"
+                                android:checked="true" />
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/chipFilterDueOverdue"
+                                style="@style/Widget.MaterialComponents.Chip.Choice"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="🚨 Due &amp; Overdue" />
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/chipFilterUpcoming"
+                                style="@style/Widget.MaterialComponents.Chip.Choice"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="🕒 Upcoming" />
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/chipFilterCompleted"
+                                style="@style/Widget.MaterialComponents.Chip.Choice"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="✅ Completed" />
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/chipFilterAll"
+                                style="@style/Widget.MaterialComponents.Chip.Choice"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="All Tasks" />
+                        </com.google.android.material.chip.ChipGroup>
+                    </HorizontalScrollView>
+
+                    <!-- Occurrences RecyclerView -->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerDashboard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false"
+                        android:layout_marginTop="4dp" />
+
+                    <!-- Empty state -->
+                    <TextView
+                        android:id="@+id/tvDashboardEmpty"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="🎉 No tasks here! You are all caught up."
+                        android:textSize="14sp"
+                        android:textColor="@color/text_secondary"
+                        android:gravity="center"
+                        android:padding="32dp"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+
+
+        <!-- ================= PAGE 2: AGENDA / CALENDAR ================= -->
+        <LinearLayout
+            android:id="@+id/layoutAgendaView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <!-- 15-Day Date Strip -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerDateStrip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="8dp" />
+
+            <!-- Selected Date Header -->
+            <TextView
+                android:id="@+id/tvAgendaDateHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tasks for Today"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="6dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerAgenda"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="80dp"
+                android:clipToPadding="false" />
+
+            <TextView
+                android:id="@+id/tvAgendaEmpty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No tasks scheduled for this day."
+                android:textSize="14sp"
+                android:textColor="@color/text_secondary"
+                android:gravity="center"
+                android:padding="40dp"
+                android:visibility="gone" />
+        </LinearLayout>
+
+
+        <!-- ================= PAGE 3: RECURRING TASKS ================= -->
+        <LinearLayout
+            android:id="@+id/layoutRecurringView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Recurring Schedules"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="14dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pause, resume, or edit recurring task rules without losing past history."
+                android:textSize="12sp"
+                android:textColor="@color/text_secondary"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="8dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerRecurring"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="80dp"
+                android:clipToPadding="false" />
+
+            <TextView
+                android:id="@+id/tvRecurringEmpty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No recurring tasks configured."
+                android:textSize="14sp"
+                android:textColor="@color/text_secondary"
+                android:gravity="center"
+                android:padding="40dp"
+                android:visibility="gone" />
+        </LinearLayout>
+
+
+        <!-- ================= PAGE 4: PRODUCTIVITY & ANALYTICS ================= -->
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/layoutProductivityView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:paddingBottom="80dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Productivity &amp; Tracking"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary" />
+
+                <!-- Daily Metric Ring Card -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    app:cardCornerRadius="14dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="@color/surface">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:padding="16dp">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Today's Completion"
+                                android:textSize="15sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/text_primary" />
+
+                            <TextView
+                                android:id="@+id/tvProdTodaySubtitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="3 of 5 tasks finished"
+                                android:textSize="13sp"
+                                android:textColor="@color/text_secondary"
+                                android:layout_marginTop="2dp" />
+
+                            <TextView
+                                android:id="@+id/tvProdMotivational"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="🔥 Great momentum! Keep nagging active."
+                                android:textSize="12sp"
+                                android:textColor="#2E7D32"
+                                android:layout_marginTop="6dp" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tvProdPercentage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="60%"
+                            android:textSize="32sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/primary"
+                            android:layout_marginStart="16dp" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Weekly 7-Day Completion Breakdown -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    app:cardCornerRadius="14dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="@color/surface">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="7-Day Completion Breakdown"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_primary" />
+
+                        <TextView
+                            android:id="@+id/tvWeeklySummaryDetails"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Recent performance across daily occurrences:"
+                            android:textSize="12sp"
+                            android:textColor="@color/text_secondary"
+                            android:layout_marginTop="2dp" />
+
+                        <!-- Horizontal container for 7 day bars -->
+                        <LinearLayout
+                            android:id="@+id/layoutWeeklyBars"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="14dp"
+                            android:weightSum="7" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Statistics Grid -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    app:cardCornerRadius="14dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="@color/surface">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Overall Statistics"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_primary" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="10dp">
+
+                            <TextView
+                                android:id="@+id/tvStatTotalDone"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Total Done: 14"
+                                android:textSize="13sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/status_completed_text" />
+
+                            <TextView
+                                android:id="@+id/tvStatTotalOverdue"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Active Overdue: 1"
+                                android:textSize="13sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/status_overdue_text" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="6dp">
+
+                            <TextView
+                                android:id="@+id/tvStatTotalSkipped"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Skipped: 1"
+                                android:textSize="12sp"
+                                android:textColor="@color/text_secondary" />
+
+                            <TextView
+                                android:id="@+id/tvStatTotalMissed"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Missed: 0"
+                                android:textSize="12sp"
+                                android:textColor="@color/text_secondary" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Streaks for Recurring Tasks -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🔥 Active Habit Streaks"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary"
+                    android:layout_marginTop="18dp" />
+
+                <LinearLayout
+                    android:id="@+id/layoutStreakList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="8dp" />
+
+                <!-- Completion History Log -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="📋 Completion History"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary"
+                    android:layout_marginTop="18dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerHistory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    android:layout_marginTop="8dp" />
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </FrameLayout>
+
+    <!-- Floating Action Button: Add Task -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAddTask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="70dp"
+        android:src="@drawable/ic_add"
+        app:backgroundTint="@color/accent"
+        app:tint="#FFFFFF"
+        android:contentDescription="Add Task" />
+
+    <!-- Bottom Navigation View -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom"
+        android:background="@color/bottom_nav_bg"
+        app:itemIconTint="@color/nav_item_tint"
+        app:itemTextColor="@color/nav_item_tint"
+        app:menu="@menu/bottom_nav_menu" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

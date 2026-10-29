@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Brand / Primary (Dark Mode optimized) -->
+    <color name="primary">#3B82F6</color>
+    <color name="primary_dark">#1D4ED8</color>
+    <color name="primary_light">#1E3A8A</color>
+    <color name="accent">#FB923C</color>
+
+    <!-- Surfaces & Backgrounds (Dark Mode) -->
+    <color name="background">#0F172A</color>
+    <color name="surface">#1E293B</color>
+    <color name="card_surface">#1E293B</color>
+    <color name="card_stroke">#334155</color>
+    <color name="divider">#334155</color>
+    <color name="pill_bg">#334155</color>
+    <color name="bottom_nav_bg">#1E293B</color>
+
+    <!-- Typography (Dark Mode: Bright High-Contrast Crisp Off-White) -->
+    <color name="text_primary">#F8FAFC</color>
+    <color name="text_secondary">#CBD5E1</color>
+    <color name="text_tertiary">#94A3B8</color>
+    <color name="text_on_primary">#FFFFFF</color>
+
+    <!-- Date Strip Item -->
+    <color name="date_item_bg">#1E293B</color>
+    <color name="date_item_text">#F8FAFC</color>
+    <color name="date_item_subtext">#CBD5E1</color>
+
+    <!-- Banner (Dark Mode) -->
+    <color name="banner_bg">#2C1A0C</color>
+    <color name="banner_stroke">#F59E0B</color>
+    <color name="banner_title">#F87171</color>
+    <color name="banner_subtitle">#FCD34D</color>
+
+    <!-- Status Badges (Dark Mode) -->
+    <color name="status_overdue_bg">#3B1313</color>
+    <color name="status_overdue_text">#FCA5A5</color>
+    <color name="status_due_bg">#3B220C</color>
+    <color name="status_due_text">#FCD34D</color>
+    <color name="status_upcoming_bg">#172554</color>
+    <color name="status_upcoming_text">#93C5FD</color>
+    <color name="status_completed_bg">#0E2E1B</color>
+    <color name="status_completed_text">#86EFAC</color>
+    <color name="status_skipped_bg">#334155</color>
+    <color name="status_skipped_text">#CBD5E1</color>
+
+    <!-- Priority Colors -->
+    <color name="priority_urgent">#EF4444</color>
+    <color name="priority_high">#F97316</color>
+    <color name="priority_medium">#3B82F6</color>
+    <color name="priority_low">#22C55E</color>
+</resources>

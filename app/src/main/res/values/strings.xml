@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">TaskNag</string>
+    <string name="tagline">Persistent Smart Reminder &amp; Completion</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="agenda">Agenda</string>
+    <string name="recurring">Recurring</string>
+    <string name="analytics">Productivity</string>
+    <string name="complete_task">Complete Task</string>
+    <string name="snooze">Snooze</string>
+    <string name="skip">Skip</string>
+</resources>

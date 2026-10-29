@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="@color/surface">
+
+    <View
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:background="@color/divider"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="⚡ Quick Add Task"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/text_primary" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create a task with persistent reminders instantly"
+        android:textSize="12sp"
+        android:textColor="@color/text_secondary"
+        android:layout_marginTop="2dp" />
+
+    <!-- Presets Horizontal Scroll -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:layout_marginTop="12dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipPresetMeds"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="💊 Take Medicine"
+                android:layout_marginEnd="6dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipPresetWater"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="💧 Drink Water (+2h)"
+                android:layout_marginEnd="6dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipPresetWorkout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🏃 Evening Workout"
+                android:layout_marginEnd="6dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipPreset15m"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="⚡ Reminder in 15m"
+                android:layout_marginEnd="6dp" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <!-- Task Name Input -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Task Name"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_marginTop="12dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etQuickTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Remind When & Nag Interval -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="12dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnQuickPickTime"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:text="🕒 Due Time"
+            android:textColor="@color/text_primary"
+            app:cornerRadius="8dp"
+            android:layout_marginEnd="6dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnQuickPickNag"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:text="🔔 Nag every 15m"
+            android:textColor="@color/banner_subtitle"
+            app:strokeColor="@color/banner_stroke"
+            app:cornerRadius="8dp"
+            android:layout_marginStart="6dp" />
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnQuickSave"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="✓ Save and Start Reminders"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:cornerRadius="10dp"
+        android:layout_marginTop="16dp" />
+</LinearLayout>

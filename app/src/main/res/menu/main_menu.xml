@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_toggle_theme"
+        android:title="Theme"
+        android:icon="@drawable/ic_theme"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_test_nag"
+        android:title="⚡ Test Nag Alert"
+        android:icon="@drawable/ic_alarm"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_refresh"
+        android:title="Refresh"
+        android:icon="@drawable/ic_refresh"
+        app:showAsAction="never" />
+</menu>
